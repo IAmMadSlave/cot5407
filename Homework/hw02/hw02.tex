@@ -180,7 +180,7 @@
         \item The leaf nodes of $T$ are $A[\floor*{n/2}+1]$, $A[\floor*{n/2}+2]$, \dots,
         $A[n]$.
         
-        When heaps are stored as arrays non-leaf nodes are stored before leaf nodes.  
+        Since $A[n/2]$ is the parent node.
 
     \end{enumerate}
 
@@ -209,18 +209,26 @@
         H   // min-heap
         
         H = new Heap(k+1) // create min-heap of size k+1
-        for i=0, i<=k, i<n, i++
+        for( i=0, i<=k, i<n, i++)
             H[i] = [i]
         H.heapify()
 
         // A will continue where it left off
         // j is the index for the min element in H
-        for( i=k+1, j=0, j<n, i++, j++
+        for( i=k+1, j=0, j<n, i++, j++)
             if i<n
                 A[j] = H.replaceMinimum(A[i])
             else
                 A[j] = H.removeMinimum()
     \end{lstlisting}
+
+    \begin{center}
+        Make heap of size $k$ will take $\mathcal{O}$($k$) time. Remove the minimum element
+        from the heap and add it to the array then from the left over elements add one to the
+        heap.
+
+        Thus, $\mathcal{O}(k)+\mathcal{O}((n-k)*log\ k)$
+     \end{center}
 \end{homeworkProblem}
 \clearpage
 
@@ -240,7 +248,39 @@
     for this problem as well. Also, when applying the method of recursion, you will often find
     that working with a more \emph{general} problem is a lot easier.)
 
+    \vspace{5 mm}
+    In order to find the k-th smallest element of an unsorted list (k being the median) an
+    algorithm similar to \textbf{QuickSort} is used. However, the array only need be partially
+    sorted as we will know which side to work on through comparing the pivot element to the
+    k-th element.
 
+    \begin{lstlisting}[frame=none]
+        k = ceil(list.length / 2) 
+        select (list, start, end, k)
+            if start==end
+                return list[start]
+            pivotIndex = [random number between start and end]
+            pivotIndex = partition(list, start, end, pivotIndex)
+
+            // after partition the pivot is in its final position
+            if k == pivotIndex
+                return list[k]
+            else if k < pivotIndex // median is below the pivot
+                return select( list, start, pivotIndex-1, k)
+            else
+                return select( list, pivotIndex+1, end, k)
+    \end{lstlisting}
+
+    Worst Case: $\mathcal{O}(n^2)$ \\
+    If bad pivots are chosen each time then it could be possible that no work will be done and
+    the list will be sorted in a worst case QuickSort style.\\
+
+    Average Case: $\mathcal{O}(n)$ \\
+    If good pivots are chosen (those which decrease problem size) then the search set decreases
+    in size exponentially. The running time looks like $T(n) = T(n/b) + \mathcal{O}(n)$, however, since
+    the work is divided by some fraction we will only be working on one side. Here Case 1 of
+    the Master Theorem always applies since $log_b 1=0$ and $c=1$ meaning $c>log_b a$ in other
+    words the running time is $\mathcal{O}(n)$
 \end{homeworkProblem}
 \clearpage
 
@@ -258,6 +298,22 @@
     the nut matches the bolt, or that the bolt is too large or too small for the nut. Call this
     a \emph{nut/bolt comparison}. Give a randomized algorithm that will match all nuts with
     their corresponding bolts with at most $\mathcal{O}$(n\ log\ n) nut/bolt comparisons.
+
+    \vspace{5 mm}
+    This problem requires performing QuickSort on the nuts array and the bolts array while
+    using the nuts as pivots for the bolts and vice versa. Select a random nut from the array and 
+    treat it as the pivot for the bolts. Partition the bolts into those are larger than the nut and
+    those that are smaller. During the process of partitioning the bolts the matching bolt for the pivot
+    nut will be found. Place the bolt in the same index as the pivot nut. After the partitioning is complete
+    use the bolt that matches the pivot nut to partition the nuts. This will result a bolt/nut pair, a set of
+    unpaired nuts and bolts which are smaller than the pair used in partitioning, and a set of unpaired nuts
+    and bolts which are larger than the pair used in partitioning.  Next recursively sort the two sets with 
+    the same algorithms which will result in all nuts and bolts being sorted.
+    
+    Since we are using a randomized version of \textbf{QuickSort}  the worst case
+    $\mathcal{O}(n^2)$ is extremely unlikely to show up and you will deal with at most 
+    $\mathcal{O}(n\ log\ n)$ comparisons to find the corresponding pairs of nuts and 
+    bolts(which will also be sorted).
 \end{homeworkProblem}
 %\clearpage
 
