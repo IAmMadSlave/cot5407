@@ -120,6 +120,22 @@
             return A[i]
     \end{lstlisting}
 
+    \begin{center}
+    $T(n)=T(n/2)+c$\\
+
+    $T(n)=T(n/4)+c+c$\\
+
+    $T(n)=T(n/2^k)+ck$\\
+
+    if $k=log_2n$ \\
+
+    $T(n)=T(n/{2^{log_2n}})+ c\ log_2n$\\
+
+    $T(1) + c\ log_2n$\\
+
+    $=\mathcal{O}$($log\ n$)
+    \end{center}
+
 \end{homeworkProblem}
 \clearpage
 
@@ -189,10 +205,10 @@
 
     \vspace{5 mm}
     \begin{lstlisting}[frame=none]
-        A[] \\ unsorted list of distinct numbers
-        H   \\ min-heap
+        A[] // unsorted list of distinct numbers
+        H   // min-heap
         
-        H = new Heap(k+1) \\ create min-heap of size k+1
+        H = new Heap(k+1) // create min-heap of size k+1
         for i=0, i<=k, i<n, i++
             H[i] = [i]
         H.heapify()
@@ -223,6 +239,7 @@
     to support your conclusions. (hint: you will find the approach of \textbf{QuickSort} useful
     for this problem as well. Also, when applying the method of recursion, you will often find
     that working with a more \emph{general} problem is a lot easier.)
+
 
 \end{homeworkProblem}
 \clearpage
