@@ -180,7 +180,8 @@
         \item The leaf nodes of $T$ are $A[\floor*{n/2}+1]$, $A[\floor*{n/2}+2]$, \dots,
         $A[n]$.
         
-        Since $A[n/2]$ is the parent node.
+        The last leaf is $n^{th}$ The parent node is $A[\floor*{n/2}]$. Thus leaf nodes are
+        are from $A[\floor*{n/2}+1]$ to $n$.
 
     \end{enumerate}
 
@@ -210,8 +211,8 @@
         
         H = new Heap(k+1) // create min-heap of size k+1
         for( i=0, i<=k, i<n, i++)
-            H[i] = [i]
-        H.heapify()
+            H[i] = A[i]
+            H.heapify()
 
         // A will continue where it left off
         // j is the index for the min element in H
