@@ -105,6 +105,21 @@
     are monotone on both sides of the peak. Design an $\mathcal{O}$(log\ n) algorithm that finds the
     peak in a unimodal array of size \emph{n}.
 
+    \vspace{5 mm}
+    \begin{lstlisting}[frame=none]
+    low = 0
+    high = A.length // this is n
+
+    while(1)
+        i = (high - low) / 2
+        if( A[i-1] < A[i] && A[i] < A[i+1] )
+            low = i
+        else if( A[i-1] > A[i] && A[i] > A[i+1] )
+            high = i
+        else
+            return A[i]
+    \end{lstlisting}
+
 \end{homeworkProblem}
 \clearpage
 
@@ -121,14 +136,38 @@
     to the floor notation in the equations).
 
     \begin{enumerate}[label=(\alph*)]
-        \item The height of $T$ is $\floor*{log\ n}$;
+        \item The height of $T$ is $\floor*{log\ n}$; 
+            
+        The maximum number of nodes in a complete binary tree of height $h$ is,
+        $2^{h+1}-1$\\
+
+        The minimum number of nodes in a binary tree of height $h$ is, 
+        $2^h$ this is because the maximum nodes in a binary tree of height $h-1$ is,
+        $2^h-1$.\\
+
+        Thus, $2^h \leq n < 2^{h+1}$\\
+
+        Then by taking the log of all sides, $h \leq log(n) < h+1$.\\
+
+        Since both $h$ and $h+1$ are integers, it follows thats $h= \floor*{log(n)}$\\
+
         \item $T$ is a \emph{balanced} binary tree, namely if we denote the two subtrees
-            of the root node of $T$ by $T_L$ and $T_R$ respectively, then
-            $|T_R| \leq |T_L| \leq 2n/3$ (In fact, you have just proved a more general
-            statement: the inequality holds for any non-leaf node in the tree) ;
+        of the root node of $T$ by $T_L$ and $T_R$ respectively, then
+        $|T_R| \leq |T_L| \leq 2n/3$ (In fact, you have just proved a more general
+        statement: the inequality holds for any non-leaf node in the tree);\\
+
+        The left child of the tree must fill up before the right child does as a result of
+        being a balanced binary tree. The largest possible imbalance that can occur is the
+        final row of the left subtree being completely populated and the final row of the right
+        subtree being completely empty. The left subtree will be bounded by 2n/3.
+
         \item The leaf nodes of $T$ are $A[\floor*{n/2}+1]$, $A[\floor*{n/2}+2]$, \dots,
-            $A[n]$.
+        $A[n]$.
+        
+        When heaps are stored as arrays non-leaf nodes are stored before leaf nodes.  
+
     \end{enumerate}
+
 
 \end{homeworkProblem}
 \clearpage
@@ -148,6 +187,24 @@
     Design an efficient algorithm that sorts such a list. Your running time should
     depend on both \emph{n} and \emph{k}.
 
+    \vspace{5 mm}
+    \begin{lstlisting}[frame=none]
+        A[] \\ unsorted list of distinct numbers
+        H   \\ min-heap
+        
+        H = new Heap(k+1) \\ create min-heap of size k+1
+        for i=0, i<=k, i<n, i++
+            H[i] = [i]
+        H.heapify()
+
+        // A will continue where it left off
+        // j is the index for the min element in H
+        for( i=k+1, j=0, j<n, i++, j++
+            if i<n
+                A[j] = H.replaceMinimum(A[i])
+            else
+                A[j] = H.removeMinimum()
+    \end{lstlisting}
 \end{homeworkProblem}
 \clearpage
 
