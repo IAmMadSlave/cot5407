@@ -1,0 +1,193 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{caption}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{mathtools}
+\usetikzlibrary{calc,shapes.multipart,chains,arrows}
+
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{%
+\parbox{\textwidth}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}\vskip-4pt}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in 
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center header
+\rhead{\hmwkDueDate} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+}
+
+%----------------------------------------------------------------------------------------
+%   COLORS AND LANGUAGAGE
+%----------------------------------------------------------------------------------------
+
+\lstset{
+    frame=lrb,xleftmargin=\fboxsep,xrightmargin=-\fboxsep,language=Java,basicstyle=\ttfamily,
+    breaklines=true,columns=fullflexible,keepspaces=true,escapeinside={\%*}{*)}
+       }
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Homework\ \#2} % Assignment title
+\newcommand{\hmwkDueDate}{Monday,\ Feburary\ 16,\ 2015} % Due date
+\newcommand{\hmwkClass}{COT\ 5407} % Course/class
+\newcommand{\hmwkClassTime}{5:00pm} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{Xie} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{Musa V. Ahmed \\collaborated with Jose Acosta} % Your name
+
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%   SYMBOLS AND STUFF
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+\belowcaptionskip=-10pt
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+    An array $A$ of \emph{n} distinct numbers are said to be \emph{unimodal} if there exists an
+    index \emph{k}, $1 \leq k \leq n$, such that $A[1] \leq A[2] \leq \dots \leq A[k-1] \leq
+    A[k]$ and $A[k] \geq A[k+1] \geq \dots \geq A[n]$. In other words $A$ has a unique peak and
+    are monotone on both sides of the peak. Design an $\mathcal{O}$(log\ n) algorithm that finds the
+    peak in a unimodal array of size \emph{n}.
+
+\end{homeworkProblem}
+\clearpage
+
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+    Let $A$ be a heap of size \emph{n}. Let \emph{T} be the binary tree corresponding to $A$ (that
+    is, $A[1]$ is the root node of $T$, $A[2]$ and $A[3]$ are the left child and right child
+    nodes of $A[1]$, etc). Prove the following properties of $T$ (you need to pay attention
+    to the floor notation in the equations).
+
+    \begin{enumerate}[label=(\alph*)]
+        \item The height of $T$ is $\floor*{log\ n}$;
+        \item $T$ is a \emph{balanced} binary tree, namely if we denote the two subtrees
+            of the root node of $T$ by $T_L$ and $T_R$ respectively, then
+            $|T_R| \leq |T_L| \leq 2n/3$ (In fact, you have just proved a more general
+            statement: the inequality holds for any non-leaf node in the tree) ;
+        \item The leaf nodes of $T$ are $A[\floor*{n/2}+1]$, $A[\floor*{n/2}+2]$, \dots,
+            $A[n]$.
+    \end{enumerate}
+
+\end{homeworkProblem}
+\clearpage
+
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+    Suppose you are given an unsorted list of \emph{n} distinct numbers. However, the list is
+    close to sorted in the sense that each number is at most \emph{k} positions away from its
+    position in the sorted list. For example, suppose the sorted list is in ascending
+    order, then the smallest element in the original list will lie between position 1
+    and position $k$ + 1, as position 1 is its position in the final sorted list.
+    Design an efficient algorithm that sorts such a list. Your running time should
+    depend on both \emph{n} and \emph{k}.
+
+\end{homeworkProblem}
+\clearpage
+
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+    Using the approach of Divide-and-Conquer, design an algorithm that finds the \emph{median}
+    of an unsorted list (the \emph{median} of a list of \emph{n} number is the $\ceil*{n/2}$-th
+    smallest number in the list; that is, the one that lies in the middle). State both the
+    worst-case running time and the average-case running time of your algorithm. You do not
+    need to give rigorous mathematical proofs of your claims but you should provide reasoning
+    to support your conclusions. (hint: you will find the approach of \textbf{QuickSort} useful
+    for this problem as well. Also, when applying the method of recursion, you will often find
+    that working with a more \emph{general} problem is a lot easier.)
+
+\end{homeworkProblem}
+\clearpage
+
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 5
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+    You have \emph{n} pairs of nuts and bolts (the bolts screw into the nuts) that have been
+    dropped onto a table with the nuts on one side and the bolts on another side; however you
+    cannot tell whether one nut is bigger than another nut or whether one bolt is bigger than
+    another bolt. You can attempt to screw a bolt into a nut and this will tell you either that
+    the nut matches the bolt, or that the bolt is too large or too small for the nut. Call this
+    a \emph{nut/bolt comparison}. Give a randomized algorithm that will match all nuts with
+    their corresponding bolts with at most $\mathcal{O}$(n\ log\ n) nut/bolt comparisons.
+\end{homeworkProblem}
+%\clearpage
+
+%----------------------------------------------------------------------------------------
+
+
+\end{document}
