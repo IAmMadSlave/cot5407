@@ -1,0 +1,189 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{caption}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{mathtools}
+\usetikzlibrary{calc,shapes.multipart,chains,arrows}
+
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{%
+\parbox{\textwidth}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}\vskip-4pt}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in 
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center header
+\rhead{\hmwkDueDate} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+}
+
+%----------------------------------------------------------------------------------------
+%   COLORS AND LANGUAGAGE
+%----------------------------------------------------------------------------------------
+
+\lstset{
+    frame=lrb,xleftmargin=\fboxsep,xrightmargin=-\fboxsep,language=Java,basicstyle=\ttfamily,
+    breaklines=true,columns=fullflexible,keepspaces=true,escapeinside={\%*}{*)}
+       }
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Homework\ \#4} % Assignment title
+\newcommand{\hmwkDueDate}{Sunday,\ April\ 12,\ 2015} % Due date
+\newcommand{\hmwkClass}{COT\ 5407} % Course/class
+\newcommand{\hmwkClassTime}{5:00pm} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{Xie} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{Musa V. Ahmed} % Your name
+
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%   SYMBOLS AND STUFF
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+\belowcaptionskip=-10pt
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+    Consider a hash table of size $m$ that is used for storing $n$ items with
+    $n$ \leq $m/2$. Suppose open addressing is used to resolve collisions.
+
+    \begin{enumerate}[label=(\alph*)]
+        \item Assuming uniform hashing, show that for every $i$ = 1, 2, \hdots,
+            $n$, the probability that the $i$th insertion required $more$
+            $than$ $k$ probes is at most $2^{-k}$, for $k$ = 1, 2, \hdots
+        \item Show that for every $i$ = 1, 2, \hdots, $n$, the probability that
+            $i$th insertion requires $more$ $than$ $2$ $log$ $n$ probes is at
+            most $1/n^2$.
+    \end{enumerate}
+
+\end{homeworkProblem}
+\clearpage
+
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+    Define the $incidence$ $matrix$ $B$ of a directed graph with no self-loops
+    to be an $n*m$ matrix with rows indexed by vertices, columns indexed by
+    edges such that,
+
+    \begin{equation}
+        B_{i,j}=\begin{cases}
+            -1, & \text{if edge $j$ leaves vertex $i$}, \\
+            1, & \text{if edge $j$ enters vertex $i$}, \\
+            0, & \text{otherwise}.
+            \end{cases}
+    \end{equation}
+
+    Let $B^T$ be the transpose of matrix $B$. Find out what the entries of the
+    $n*n$ matrix $BB^T$ stand for.
+
+\end{homeworkProblem}
+\clearpage
+
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+    Given an undirected graph with $n$ vertices and $m$ edges, find an
+    $\mathcal{O}{n+m}$ time algorithm that determines whether it is possible to
+    color all the vertices red and blue such that every edge is between a red
+    vertex and blue vertex. If such a coloring exists, your algorithm should
+    produce one.
+
+\end{homeworkProblem}
+\clearpage
+
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+    Given a grpah $G$ and a minimum spanning tree T, suppose we decrease the
+    weight of one of the edges in $T$. Show that $T$ is still a minimum
+    spanning tree for $G$.
+
+\end{homeworkProblem}
+\clearpage
+
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 5
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+    Suppose that all edge weights in a graph are integers in the range from 1
+    to $W$ for some constant $W$ (say, $W=20$). How fast can you make Prim's
+    algorithm run? Express your answer in terms of $n, m, W$.
+
+\end{homeworkProblem}
+%\clearpage
+
+%----------------------------------------------------------------------------------------
+
+
+\end{document}
